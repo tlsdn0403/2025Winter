@@ -427,7 +427,7 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
-
+.json
 .vs/
 .bin/
 # JetBrains Rider
