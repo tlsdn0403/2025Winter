@@ -427,7 +427,7 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
-.suo
+
 # JetBrains Rider
 *.sln.iml
 
@@ -435,3 +435,6 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,visualstudio
+
+*.suo
+*.db
