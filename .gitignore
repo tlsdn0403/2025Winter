@@ -441,3 +441,4 @@ FodyWeavers.xsd
 v17/
 FileContentIndex/
 *.pdb
+*.json
