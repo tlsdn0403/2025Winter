@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\tlsdn\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\2025 winter\\",
+  "WorkspaceRootPath": "C:\\Users\\tlsdn\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\2025 winter\\baekjoon\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7BE46255-DEB5-4BE2-AC47-559E15633D71}|baekjoon.vcxproj|C:\\Users\\tlsdn\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\2025 winter\\2592.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{7BE46255-DEB5-4BE2-AC47-559E15633D71}|baekjoon.vcxproj|C:\\Users\\tlsdn\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\2025 winter\\baekjoon\\2592.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{7BE46255-DEB5-4BE2-AC47-559E15633D71}|baekjoon.vcxproj|solutionrelative:2592.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -80,11 +80,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "2592.cpp",
-              "DocumentMoniker": "C:\\Users\\tlsdn\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\2025 winter\\2592.cpp",
+              "DocumentMoniker": "C:\\Users\\tlsdn\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\2025 winter\\baekjoon\\2592.cpp",
               "RelativeDocumentMoniker": "2592.cpp",
-              "ToolTip": "C:\\Users\\tlsdn\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\2025 winter\\2592.cpp",
+              "ToolTip": "C:\\Users\\tlsdn\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\2025 winter\\baekjoon\\2592.cpp",
               "RelativeToolTip": "2592.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-01-06T08:19:56.894Z",
               "EditorCaption": ""
