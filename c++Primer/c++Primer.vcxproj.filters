@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="function_264p.cpp">
+    <ClCompile Include="function_235p.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
