@@ -8,7 +8,7 @@ int fact(int val) {
 	return ret;
 }
 int main() {
-	cout << "hello";
+	cout << "hellos";
 	int t = 0;
 	cout << t;
 
