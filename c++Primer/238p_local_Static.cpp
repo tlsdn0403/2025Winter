@@ -7,7 +7,7 @@ using namespace std;
 size_t count_calls() { 
 	//static 사용해서 변수가 프로그램의 전체 실행 시간 동안 메모리에 유지
 	//지역 static 객체는 함수를 마쳐도 소멸하지 않는다
-	 size_t ctr = 0; 
+	static size_t ctr = 0; 
 	return ++ctr;
 }
 int main() {
