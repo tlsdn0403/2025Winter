@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="function_235p.cpp">
+    <ClCompile Include="type_conversion.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
