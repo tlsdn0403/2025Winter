@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="6.Function\6.2.2 Reference.cpp">
+    <ClCompile Include="FileName.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
