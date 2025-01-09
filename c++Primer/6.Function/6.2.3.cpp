@@ -17,9 +17,9 @@ void swap_1(int& a, int& b)
 	a = b;
 	b = c;
 }
-void makeBig(string &s) {
+void makeUpper(string &s) {
 	for (auto &c : s) {
-		c=tolower(c);
+		c=toupper(c);
 	}
 }
 string::size_type find_char(const string& s, char c, string::size_type& occurs)  //size_type은  수를 담음 int보다 많이 담을 수 있다
@@ -45,7 +45,7 @@ int main()
 	reset(i); //매개변수가 int&인 reset 버전을 호출
 	find_char("Hello world", 'o', ctr); //첫 매개변수가 const임으로 상수를 넣어도 됨
 	string s = "Hello world";
-	makeBig(s);
+	makeUpper(s);
 	cout << ctr << endl;
 	cout << s;
 }
