@@ -17,7 +17,16 @@ bool str_subrange(const string& str1, const string& str2)
 		}
 	}
 	return false;
-
+}
+//crt이 1보다 크면 word의 복수형을 반환
+string make_plural(size_t ctr, const string& word, const string& ending) 
+{
+	return (ctr > 1) ? word + ending : word;
+}
+//두 스트링 중 짧은 것에 대한 참조자를 반환한다
+const string& shorterString(const string& s1, const string& s2) 
+{
+	return (s1 < s2) ? s1 : s2; //s1이 더 작으면 s1 , s2가 더 작으면 s2 반환
 }
 
 int main() {
