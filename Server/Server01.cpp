@@ -207,7 +207,7 @@ int main(int argc, char* argv[])
 {
 	// 윈속 초기화
 	WSADATA wsa;
-	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
+	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0) //최상위 윈속 버전 2.2 , WSADATA 구조체
 		return 1;
 
 	// 멀티스레드를 이용하여 두 개의 서버를 동시에 구동한다.
