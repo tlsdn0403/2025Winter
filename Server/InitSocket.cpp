@@ -58,8 +58,11 @@ int main(int argc, char* argv[])
 {
 	//윈속 초기화
 	WSADATA wsa;
-	if (WSAStartup(MAKEWORD(2, 2), &wsa))
+	if (WSAStartup(MAKEWORD(1, 1), &wsa)) {
+		
 		return 1;
+	}
+	std::cout << wsa.wVersion << ' ' << wsa.wHighVersion << ' ' << wsa.szDescription << ' ' << wsa.szSystemStatus << std::endl;
 	std::cout << "윈속 초기화 성공" << std::endl;
 
 	//소켓 생성
@@ -67,7 +70,6 @@ int main(int argc, char* argv[])
 	if (sock == INVALID_SOCKET) {
 		int errorCode = WSAGetLastError();
 		std::cout << "소켓 생성 실패, 오류 코드: " << errorCode << std::endl;
-		err_display(errorCode); // 상세 오류 출력
 		err_quit("socket");
 	}
 	std::cout << "소켓 생성 성공" << std::endl;
@@ -77,5 +79,8 @@ int main(int argc, char* argv[])
 
 	//윈속 종료
 	WSACleanup();
+	std::cout << wsa.wVersion << ' ' << wsa.wHighVersion << ' ' << wsa.szDescription << ' ' << wsa.szSystemStatus << std::endl;
+	WSADATA wsa_2;
+	std::cout << wsa_2.wVersion << ' ' << wsa_2.wHighVersion << ' ' << wsa_2.szDescription << ' ' << wsa_2.szSystemStatus << std::endl;
 	return 0;
 }
