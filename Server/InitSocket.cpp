@@ -79,15 +79,24 @@ int main(int argc, char* argv[])
 	std::cout << "扩加 檬扁拳 己傍" << std::endl;
 
 	//家南 积己
-	SOCKET sock = socket(AF_INET6, SOCK_DGRAM, 0);
+	SOCKET sock = WSASocket(AF_INET6, SOCK_STREAM,IPPROTO_TCP,0,0,0);
 	if (sock == INVALID_SOCKET) {
 		err_quit("socket");
 	}
-	std::cout << "家南 积己 己傍" << std::endl;
+	std::cout << "TCP 家南 积己 己傍" << std::endl;
+	
+	//家南 摧扁
+	closesocket(sock);
+
+	SOCKET sock_2 = WSASocket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP, 0, 0, 0);
+	if (sock == INVALID_SOCKET) {
+		err_quit("socket");
+	}
+	std::cout << "UDP 家南 积己 己傍" << std::endl;
 	int retval = f(-100);
 	if (retval == SOCKET_ERROR)err_quit("f()");
 	//家南 摧扁
-	closesocket(sock);
+	closesocket(sock_2);
 
 	//扩加 辆丰
 	WSACleanup();
