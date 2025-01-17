@@ -16,14 +16,16 @@
 // 소켓 함수 오류 출력 후 종료
 void err_quit(const char* msg)
 {
-	LPVOID lpMsgBuf;
+	LPVOID lpMsgBuf; //Long Pointer Void void*라고 생각하면 된다
 	FormatMessageA(
-		FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
-		NULL, WSAGetLastError(),
-		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		(char*)&lpMsgBuf, 0, NULL);
+		FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,NULL,// 오류메세지를 저장할 공간을 함수가 할당 | 운영체제에서 오류 메세지 가져옴 ,IP소스에는 널
+		WSAGetLastError(), //오류코드를 나타내며, WSAGetLastError()의 리턴값을 넣음 
+		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // 오류메세지를 나타낼 언어 한글로 나타냄
+		(char*)&lpMsgBuf, //주솟값을 저장할 변수
+		0, NULL);  
+
 	MessageBoxA(NULL, (const char*)lpMsgBuf, msg, MB_ICONERROR);
-	LocalFree(lpMsgBuf);
+	LocalFree(lpMsgBuf); //메모리를 반환해야한다.
 	exit(1);
 }
 
