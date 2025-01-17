@@ -54,6 +54,27 @@ void err_display(int errcode)
 	printf("[오류] %s\n", (char*)lpMsgBuf);
 	LocalFree(lpMsgBuf);
 }
+//연습문제 5번 내용
+int f(int x)
+{
+	LPVOID lpMsgBuf; //Long Pointer Void void*라고 생각하면 된다
+	if (x >= 0) {
+		FormatMessageA(
+			FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
+			NULL, 0,
+			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+			(char*)&lpMsgBuf, 0, NULL);
+		return 0;
+	}
+	else {
+		FormatMessageA(
+			FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
+			NULL, WSAEINVAL,
+			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+			(char*)&lpMsgBuf, 0, NULL);
+		return SOCKET_ERROR;	
+	}
+}
 int main(int argc, char* argv[]) 
 {
 	//윈속 초기화
@@ -66,21 +87,18 @@ int main(int argc, char* argv[])
 	std::cout << "윈속 초기화 성공" << std::endl;
 
 	//소켓 생성
-	SOCKET sock = socket(AF_INET6, SOCK_STREAM, 0);
+	SOCKET sock = socket(AF_INET6, SOCK_DGRAM, 0);
 	if (sock == INVALID_SOCKET) {
-		int errorCode = WSAGetLastError();
-		std::cout << "소켓 생성 실패, 오류 코드: " << errorCode << std::endl;
 		err_quit("socket");
 	}
 	std::cout << "소켓 생성 성공" << std::endl;
-
+	int retval = f(-100);
+	if (retval == SOCKET_ERROR)err_quit("f()");
 	//소켓 닫기
 	closesocket(sock);
 
 	//윈속 종료
 	WSACleanup();
-	std::cout << wsa.wVersion << ' ' << wsa.wHighVersion << ' ' << wsa.szDescription << ' ' << wsa.szSystemStatus << std::endl;
-	WSADATA wsa_2;
-	std::cout << wsa_2.wVersion << ' ' << wsa_2.wHighVersion << ' ' << wsa_2.szDescription << ' ' << wsa_2.szSystemStatus << std::endl;
+
 	return 0;
 }
