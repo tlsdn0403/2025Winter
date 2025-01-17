@@ -59,19 +59,11 @@ int f(int x)
 {
 	LPVOID lpMsgBuf; //Long Pointer Void void*라고 생각하면 된다
 	if (x >= 0) {
-		FormatMessageA(
-			FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
-			NULL, 0,
-			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-			(char*)&lpMsgBuf, 0, NULL);
+		WSASetLastError(0);
 		return 0;
 	}
 	else {
-		FormatMessageA(
-			FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
-			NULL, WSAEINVAL,
-			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-			(char*)&lpMsgBuf, 0, NULL);
+		WSASetLastError(WSAEINVAL);
 		return SOCKET_ERROR;	
 	}
 }
