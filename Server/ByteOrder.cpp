@@ -23,6 +23,7 @@ int main(int argc, char* argv[]) {
 
     // 호스트 -> 네트워크
     std::cout << "호스트 바이트 -> 네트워크 바이트" << std::endl;
+    //16진수로 표현하기 위해 std::hex
     std::cout << std::hex << "0x" << x1 << " -> 0x" << x2 << std::endl;
     std::cout << std::hex << "0x" << y1 << " -> 0x" << y2 << std::endl;
 
