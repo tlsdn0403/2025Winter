@@ -2,7 +2,6 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS // 구형 소켓 API 사용 시 경고 끄기
 #include <iostream>
 #include <iomanip> // std::hex 사용을 위한 헤더 추가
-
 #include <winsock2.h> // 윈속2 메인 헤더
 #include <ws2tcpip.h> // 윈속2 확장 헤더
 
@@ -64,6 +63,8 @@ bool GetIpAddr(const char* name, struct in_addr* addr)
 	return true;
 }
 
+
+
 bool GetDomainName(struct in_addr addr, char* name, int namelen) {
 	struct hostent* ptr = gethostbyaddr((const char*)&addr,sizeof(addr),AF_INET);
 
@@ -77,6 +78,8 @@ bool GetDomainName(struct in_addr addr, char* name, int namelen) {
 	strncpy(name, ptr->h_name, namelen);
 	return true;
 }
+
+
 int main(int argc, char* argv[])
 {
 	WSADATA wsa;
@@ -85,6 +88,24 @@ int main(int argc, char* argv[])
 	}
 	
 	std::cout << "도메인 전환 전 :" << TESTNAME << '\n';
+
+	//도메인 주소 -> IP주소
 	struct in_addr addr;
-	
+	if (GetIpAddr(TESTNAME, &addr)) {
+		//성공이면 결과 출력
+		char str[INET_ADDRSTRLEN];
+		inet_ntop(AF_INET, &addr, str, sizeof(str));
+		std::cout << "도메인 주소 변환 후 :" << str<<'\n';
+
+		//IP주소 -> 도메인 이름
+		char name[256];
+		if (GetDomainName(addr, name, sizeof(name))) {
+			//if true
+			std::cout << "도메인 이름 :" << name << '\n';
+		}
+	}
+
+	WSACleanup();
+	return 0;
+
 }
