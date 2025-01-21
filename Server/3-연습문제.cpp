@@ -49,7 +49,7 @@ void err_display(int errcode)
 	printf("[오류] %s\n", (char*)lpMsgBuf);
 	LocalFree(lpMsgBuf);
 }
-bool GetIpAddr(const char* name, struct in_addr* addr) 
+bool GetIpAddr(const char* name, struct in_addr* addr)
 {
 	struct hostent* ptr = gethostbyname(name);
 	if (ptr == NULL) {
@@ -66,22 +66,22 @@ bool GetIpAddr(const char* name, struct in_addr* addr)
 
 
 bool GetDomainName(struct in_addr addr, char* name, int namelen) {
-	struct hostent* ptr = gethostbyaddr((const char*)&addr,sizeof(addr),AF_INET);
+	struct hostent* ptr = gethostbyaddr((const char*)&addr, sizeof(addr), AF_INET);
 
 	if (ptr == NULL) {
 		err_display("gethostbyhost()");
 		return false;
 	}
-	if(ptr->h_addrtype != AF_INET){
+	if (ptr->h_addrtype != AF_INET) {
 		return false;
 	}
 	strncpy(name, ptr->h_name, namelen);
 	return true;
 }
 bool IsLittleEndian() {
-	unsigned int x = 1;
-	std::cout << (&x)[0] << (&x)[1];
-	return (& x)[0] == 1;
+	unsigned int x = 0x32812311;
+	std::cout<<std::hex << (int)*(char*)(&x) << '\n';
+	return *(char*)(&x) == 0x78; //x의 주소를 가져와서 char*로 캐스팅 한 다음 역참조 (캐스팅은 우에서 좌로 연산 <- )
 }
 
 int main(int argc, char* argv[])
@@ -90,25 +90,7 @@ int main(int argc, char* argv[])
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {
 		return 1;
 	}
-	
-	std::cout << "도메인 전환 전 :" << TESTNAME << '\n';
 
-	//도메인 주소 -> IP주소
-	struct in_addr addr;
-	if (GetIpAddr(TESTNAME, &addr)) {
-		//성공이면 결과 출력
-		char str[INET_ADDRSTRLEN];
-		inet_ntop(AF_INET, &addr, str, sizeof(str));
-		std::cout << "도메인 주소 변환 후 :" << str<<'\n';
-
-		//IP주소 -> 도메인 이름
-		char name[256];
-		if (GetDomainName(addr, name, sizeof(name))) {
-			//if true
-			std::cout << "도메인 이름 :" << name << '\n';
-		}
-	}
-	
 	WSACleanup();
 	if (IsLittleEndian()) {
 		std::cout << "리틀 인디언" << '\n';

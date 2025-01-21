@@ -7,6 +7,9 @@
 
 #pragma comment(lib, "ws2_32") // ws2_32.lib 링크
 
+
+
+
 int main(int argc, char* argv[]) {
     // 윈속 초기화
     WSADATA wsa;
@@ -37,5 +40,6 @@ int main(int argc, char* argv[]) {
     std::cout << std::hex << "0x" << x1 << " -> 0x" << htonl(x1) << std::endl;
 
     WSACleanup();
+    
     return 0;
 }
