@@ -6,6 +6,7 @@
 #include <ws2tcpip.h> // 윈속2 확장 헤더
 
 #pragma comment(lib, "ws2_32") // ws2_32.lib 링크
+char* SERVERIP = (char*)"127.0.0.1";
 #define SERVERPORT 9000
 #define BUFSIZE 512
 
@@ -55,75 +56,26 @@ int main(int argc, char* argv[])
 {
 	int retval;
 
+
+	// 명령행 인수가 있으면 IP 주소로 사용
+	if (argc > 1)SERVERIP = argv[1];
+
+	//윈속 초기화
 	WSADATA wsa;
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		return 1;
-	//소켓 생성
-	SOCKET listen_sock = socket(AF_INET, SOCK_STREAM, 0);
-	if (listen_sock == INVALID_SOCKET)
-		err_quit("socket()");
 
-	//bind
+	SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (sock == INVALID_SOCKET)err_quit("socket()");
+
+	//connect()
 	struct sockaddr_in serveraddr;
-	memset(&serveraddr, 0, sizeof(serveraddr)); //공간 할당
+	memset(&serveraddr, 0, sizeof(serveraddr));
 	serveraddr.sin_family = AF_INET;
-	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY); //host to network
+	inet_pton(AF_INET, SERVERIP, &serveraddr.sin_addr);
 	serveraddr.sin_port = htons(SERVERPORT);
-	retval = bind(listen_sock, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
-	if (retval == SOCKET_ERROR) {
-		err_quit("bind()");
-	}
+	retval = connect(sock, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
+	if (retval == SOCKET_ERROR)err_quit("connect()");
 
-	//listen 클라이언트가 접속하기를 기다림
-	retval = listen(listen_sock, SOMAXCONN);
-	if (retval == SOCKET_ERROR) {
-		err_quit("listen()");
-	}
 
-	SOCKET client_sock; //데이터 통신에 사용할 변수
-	struct sockaddr_in clientaddr;//IPV4용 소켓 주소 구조체
-	int addrlen;
-	char buf[BUFSIZE + 1]; //문자열 형태의 IPV4주소를 담을 버퍼
-
-	while (true) {
-		addrlen = sizeof(clientaddr);
-		client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen); //소켓 함수 호출
-		if (client_sock == INVALID_SOCKET) {
-			err_display("accept()");
-			break;
-		}
-		char addr[INET_ADDRSTRLEN];
-		inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr)); //IP주소 : 숫자->문자열
-		printf("\n[TCP 서버] 클라이언트 접소 : IP 주소 = %s, 포트번호 = &d\n", addr, ntohs(clientaddr.sin_port));
-
-		while (1) {
-			//데이터 받기
-			retval = recv(client_sock, buf, BUFSIZE, 0);
-			if (retval == SOCKET_ERROR) {
-				err_display("recv()");
-				break;
-			}
-			else if (retval == 0) {
-				break;
-			}
-			//받은 데이터 출력
-			buf[retval] = '\0';
-			printf("[TCP/%s:%d]%s\n", addr, ntohs(clientaddr.sin_port), buf);
-
-			//데이터 보내기
-			retval = send(client_sock, buf, retval, 0);
-			if (retval == SOCKET_ERROR) {
-				err_display("send()");
-				break;
-			}
-		}
-		//소켓 닫기
-		closesocket(client_sock);
-		printf("[TCP 서버] 클라이언트 종료 : IP 주소 = %s , 포트번호 = %d\n", addr, ntohs(clientaddr.sin_port));
-	}
-	closesocket(listen_sock);
-
-	//윈속 종료
-	WSACleanup();
-	return 0;
 }
