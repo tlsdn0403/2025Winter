@@ -77,5 +77,34 @@ int main(int argc, char* argv[])
 	retval = connect(sock, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
 	if (retval == SOCKET_ERROR)err_quit("connect()");
 
+	//데이터 통신에 사용할 변수
+	char buf[BUFSIZE + 1];
+	int len;
+
+	//서버와 데이터 통신
+	while (1) {
+		//데이터 입력
+		printf("\n [보낼 데이터]");
+		if (fgets(buf, BUFSIZE + 1, stdin) == NULL)
+			break;
+		//'\n'문자 제거
+		len = (int)strlen(buf);
+		if (buf[len - 1] == '\n')
+			buf[len - 1] = '\0';
+		if (strlen(buf) == 0)
+			break;
+
+		//데이터 보내기
+		retval = send(sock, buf, (int)strlen(buf), 0);
+		if (retval == SOCKET_ERROR) {
+			err_display("send()");
+			break;
+		}
+
+		printf("[TCP 클라이언트]");
+
+
+	}
+
 
 }
