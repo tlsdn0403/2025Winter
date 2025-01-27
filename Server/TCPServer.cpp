@@ -75,19 +75,20 @@ int main(int argc, char* argv[])
 	}
 
 	//listen 클라이언트가 접속하기를 기다림
-	retval = listen(listen_sock, SOMAXCONN);
+	retval = listen(listen_sock, SOMAXCONN); //소켓, 서버가 당장 처리하지 않더라도 접속 가능한 클라이언트 개수 ( SOMAXCONN: 하부 프로토콜에서 지원 가능한 최댓값 )
 	if (retval == SOCKET_ERROR) {
 		err_quit("listen()");
 	}
+	//데이터 통신에 사용할 변수
 
-	SOCKET client_sock; //데이터 통신에 사용할 변수
-	struct sockaddr_in clientaddr;//IPV4용 소켓 주소 구조체
-	int addrlen;
+	SOCKET client_sock; //accept() 함수의 리턴값을 저장 
+	struct sockaddr_in clientaddr;//IPV4용 소켓 주소 구조체 , 접속한 클라이언트의 주소정보가 여기에 저장
+	int addrlen; //클라이언트 주소 정보
 	char buf[BUFSIZE + 1]; //문자열 형태의 IPV4주소를 담을 버퍼
 
-	while (true) {
+	while (true) { //일반적으로 서버는 계속 클라이언트 요청을 처리해야함으로 무한 루프를 돈다
 		addrlen = sizeof(clientaddr);
-		client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen); //소켓 함수 호출
+		client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen); //클라이언트 접속을 수용하고 클라이언트와 통신 할 수 있는 새로운 소켓을 생성 리턴
 		if (client_sock == INVALID_SOCKET) {
 			err_display("accept()");
 			break;
