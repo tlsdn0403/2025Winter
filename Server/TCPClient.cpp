@@ -101,10 +101,23 @@ int main(int argc, char* argv[])
 			break;
 		}
 
-		printf("[TCP 클라이언트]");
+		printf("[TCP 클라이언트] %d 바이트를 보냈습니다. \n",retval);
 
+		retval = recv(sock, buf, retval, MSG_WAITALL);
+		if (retval == SOCKET_ERROR) {
+			err_display("recv()");
+		}
+		else if (retval == 0) {
+			break;
+		}
 
+		buf[retval] = '\0';
+		printf("[TCP 클라이언트] %d 바이트를 받았습니다. \n", retval);
+		printf("\n [받은 데이터] %s",buf);
 	}
+	closesocket(sock);
+	WSACleanup();
+	return 0;
 
 
 }
