@@ -68,8 +68,8 @@ int main(int argc, char* argv[])
 	memset(&serveraddr, 0, sizeof(serveraddr)); //공간 할당
 	serveraddr.sin_family = AF_INET;
 	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY); //host to network
-	serveraddr.sin_port = htons(SERVERPORT);
-	retval = bind(listen_sock, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
+	serveraddr.sin_port = htons(SERVERPORT); //서버의 지역 포트 번호 9000 설정 , htons() 함수를 이용하여 네트워크 바이트 정렬한 값을 넣음
+	retval = bind(listen_sock, (struct sockaddr*)&serveraddr, sizeof(serveraddr)); //소켓의 지역 IP주소와 지역 포트 번호를 결정.
 	if (retval == SOCKET_ERROR) {
 		err_quit("bind()");
 	}
@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
 		}
 		char addr[INET_ADDRSTRLEN];
 		inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr)); //IP주소 : 숫자->문자열
-		printf("\n[TCP 서버] 클라이언트 접소 : IP 주소 = %s, 포트번호 = &d\n", addr, ntohs(clientaddr.sin_port));
+		printf("\n[TCP 서버] 클라이언트 접속 : IP 주소 = %s, 포트번호 = %d\n", addr, ntohs(clientaddr.sin_port));
 
 		while (1) {
 			//데이터 받기
