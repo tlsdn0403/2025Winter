@@ -95,7 +95,7 @@ int main(int argc, char* argv[])
 			break;
 
 		//데이터 보내기
-		retval = send(sock, buf, (int)strlen(buf), 0);
+		retval = send(sock, buf, (int)strlen(buf), 0); //(소켓 , 버퍼의 주소 , 데이터의 크기 , 함수의 동작을 바꾸는 옵션(거의 항상 0)
 		if (retval == SOCKET_ERROR) {
 			err_display("send()");
 			break;
