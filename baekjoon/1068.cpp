@@ -3,18 +3,15 @@
 using namespace std;
 
 int num;
-vector<vector<int>> map;
-void findleaf(const vector<vector<int>> &tree, int currentNode, int &leaf) {
-    if (tree[currentNode].size() <= 1) {  //자식이 없는경우
-        leaf--;
-        return;
-    }
-    else { //자식이 있다면
-        for (int i = 1; i < tree[currentNode].size(); i++) {
-            findleaf(tree, tree[currentNode][i], leaf);
+vector<vector<int>> tree;
+vector<int> deleteParent;
+bool isInVector(const vector<int>& vec, int deleteNode) {
+    for (int num : vec) {
+        if (num == deleteNode) {
+            return true; // 수를 찾음
         }
     }
-    return;
+    return false;
 }
 
 int answer(const vector<vector<int>> &tree, int dn) {
@@ -23,11 +20,13 @@ int answer(const vector<vector<int>> &tree, int dn) {
         return 0;
     }
     for (int i = 0; i < num; i++) { //삭제전 전체 리프노드 수
-        if (tree[i].size() <= 1) { //자식이 없다
+        if (isInVector(deleteParent, tree[i][0])) { //트리의 부모가 deleteParent에 있으면 참
+            deleteParent.push_back(i);
+        }
+        else if (tree[i].size() <= 1 && !isInVector(deleteParent, i)) { //자식이 없다
             leaf++;
         }
     }
-    findleaf(tree, dn, leaf);
     int parent = tree[dn][0];
     if (tree[parent].size() == 2) { //삭제 노드의 부모가 리프노드가 될 경우
         leaf++;
@@ -38,16 +37,17 @@ int answer(const vector<vector<int>> &tree, int dn) {
 
 int main() {
     cin >> num;
-    map.resize(num);
+    tree.resize(num);
     for (int i = 0; i < num; i++) {
         int parent;
         cin >> parent; // 부모 값 입력
-        map[i].push_back(parent); // 부모 값 저장
+        tree[i].push_back(parent); // 부모 값 저장
         if (parent >= 0) {
-            map[parent].push_back(i); // 부모에 자식 추가
+            tree[parent].push_back(i); // 부모에 자식 추가
         }
     }
     int deleteNode;
     cin >> deleteNode;
-    cout << answer(map, deleteNode);
+    deleteParent.push_back(deleteNode);
+    cout << answer(tree, deleteNode);
 }
