@@ -21,17 +21,24 @@ int answer(const vector<vector<int>> &tree, int dn) {
         return 0;
     }
     for (int i = 0; i < num; i++) { //삭제전 전체 리프노드 수
-        if (isInVector(deleteParent, parentNum[i]) ) { //트리의 부모가 deleteParent에 있으면 참
+        for (int j = 0; j < num; j++) {
+            if (isInVector(deleteParent, parentNum[j])) { //트리의 부모가 deleteParent에 있으면 참 
+                deleteParent.push_back(j);
+            }
+        }
+        if (isInVector(deleteParent, parentNum[i])&& !isInVector(deleteParent , i) ) { //순서대로 입력한다는 보장이 없음으로 한 번 더
             deleteParent.push_back(i);
         }
         else if (tree[i].empty() && !isInVector(deleteParent, i)) { //자식이 없다
             leaf++;
         }
     }
+
     int parent = parentNum[dn];
     if (tree[parent].size() == 1) { //삭제 노드의 부모가 리프노드가 될 경우
         leaf++;
     }
+   
     return leaf;
 }
 
