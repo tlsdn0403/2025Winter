@@ -20,8 +20,7 @@ int main()
 	for (int i = 1; i < n-1; i++) {
 		result += CCW(position[0], position[i], position[i + 1]);
 	}
-	result /= 2;
 	cout << fixed; //고정시켜줌
 	cout.precision(1); // 소수점 1자리 고정
-	cout << abs(result);
+	cout << abs(result)/2.0; //2.0 으로 나누어 줘야 했음
 }
