@@ -15,7 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="12.1.cpp">
+    <ClInclude Include="Sales_item.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BookStore_Program.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
