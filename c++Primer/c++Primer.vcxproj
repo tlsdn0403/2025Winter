@@ -19,10 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sales_data.h" />
     <ClInclude Include="Sales_item.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BookStore_Program.cpp" />
+    <ClCompile Include="7.1.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
