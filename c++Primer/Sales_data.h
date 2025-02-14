@@ -20,16 +20,36 @@ std::ostream &print(std::ostream&, const Sales_data&);
 std::istream &read(std::istream&, Sales_data&);
 
 
-Sales_data& Sales_data::combine(const Sales_data& lv) {
+Sales_data& Sales_data::combine(const Sales_data& lv)
+{
 	units_sold += lv.units_sold; //lv의 맴버를 객체 자신의 맴버에 더한다
 	revenue += lv.revenue;
 	return *this; //이 함수를 호출한 객체를 반환한다
 }
 
-double Sales_data::avg_price() const {
+double Sales_data::avg_price() const
+{
 	if (units_sold)
 		return revenue / units_sold;
 	else
 		return 0;
+}
+std::istream& read(std::istream& is, Sales_data& item)
+{
+	double price = 0;
+	is >> item.bookNo >> item.units_sold >> price;
+	item.revenue = price * item.units_sold;
+	return is;
+}
+std::ostream& print(std::ostream& os, const Sales_data& item)
+{
+	os << item.isbn() << " " << item.units_sold << " " << item.revenue << " " << item.avg_price();
+	return os;
+}
+Sales_data add(const Sales_data& lhs, const Sales_data& rhs)
+{
+	Sales_data sum = lhs; //lhs값을 sum에 복사해 넣는다
+	sum.combine(rhs); //rhs의 값을 sum에 더하여 넣는다
+	return sum;
 }
 #endif // !SALES_DATA_H
