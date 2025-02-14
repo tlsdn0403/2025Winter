@@ -5,6 +5,11 @@
 #include<string>
 
 struct Sales_data {
+	Sales_data() = default; //기본 생성자를 정의한다.
+	//( )중괄호 사이에 있는 코드는 생성자 초기 값 목록이다.
+	Sales_data(const std:: string&s): bookNo(s){ }
+	Sales_data(const std::string &s, unsigned n ,double p): bookNo(s), units_sold(n), revenue(p*n) { }
+
 	//매개변수 뒤에 const를 두어 this가 const에 대한 포인터임을 나타냄
 	std::string isbn() const { return this->bookNo; } //클래스는 컴파일러가 맴버선언 후 함수를 처리함으로 bookNo를 사용할 수 있다.
 	Sales_data& combine(const Sales_data&);
