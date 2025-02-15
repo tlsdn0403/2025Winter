@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="Person.h" />
     <ClInclude Include="Sales_data.h" />
-    <ClInclude Include="Sales_item.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="7.1.4.cpp" />
