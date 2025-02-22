@@ -23,7 +23,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="unique_shared.cpp">
+    <ClCompile Include="10.2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

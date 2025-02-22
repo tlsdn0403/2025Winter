@@ -2,6 +2,7 @@
 #include<vector>
 #include<numeric>
 #include<iterator>
+#include<list>
 using namespace std;
 void accumlateInt()
 {
@@ -77,6 +78,55 @@ void copy_int()
 	
 	cout << ret;
 }
-int main() {
-	copy_int();
+void copy_int_array()
+{
+	int a1[] = { 0,1,2,3,4,5,6 };
+	int a2[sizeof(a1)/sizeof(int)];
+	auto ret = copy(begin(a1), end(a1), a2); //ret은 포인터임
+	for (auto num = 0; num < sizeof(a2) / sizeof(int); num++) {
+		cout << a2[num];
+	}
+	cout << endl;
+	cout << &a2[6] << endl;
+	cout << ret; //ret은 복사한 값의 마지막 요소 바로 다음을 가르킨다
+}
+void practice_10_6_a()
+{
+	vector<int> vec; list<int>lst; int i;
+	while (cin >> i) {
+		lst.push_back(i);
+	}
+	vec.resize(size(lst));
+	copy(lst.cbegin(), lst.cend(), vec.begin());
+	for (int num : vec) {
+		cout << num << " ";
+	}
+}
+void practice_10_6_b()
+{
+	vector<int> vec;
+
+	vector<int> vec1;
+	cout << "vec :" << vec.data() << endl;
+	vec.push_back(1);
+	cout << "vec pushback:" << vec.data() << endl;
+	vec.push_back(1);
+	cout << "vec pushback:" << vec.data() << endl;
+
+	cout << "vec1 :" << vec1.data() << endl;
+	vec1.reserve(10);
+	vec1.push_back(1);
+	cout << "vec1 pushback:" << &(vec1[0]) << endl;
+	vec1.push_back(1);
+	cout << "vec1 pushback:" << vec1.data() << endl;
+
+	/*vec.resize(10);
+	fill_n(vec.begin(), 10, 0);
+	for (int num : vec) {
+		cout << num << " ";
+	}*/
+}
+int main()
+{
+	practice_10_6_b();
 }
