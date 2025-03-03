@@ -3,6 +3,7 @@
 #include<numeric>
 #include<iterator>
 #include<list>
+#include<algorithm>
 using namespace std;
 void accumlateInt()
 {
@@ -125,6 +126,12 @@ void practice_10_6_b()
 	for (int num : vec) {
 		cout << num << " ";
 	}*/
+}
+void elimDups(vector<string> &words)
+{
+	sort(words.begin(), words.end());
+	auto end_unique = unique(words.begin(), words.end());
+	words.erase(end_unique, words.end());
 }
 int main()
 {
