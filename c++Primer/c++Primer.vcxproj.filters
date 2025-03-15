@@ -23,7 +23,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="virtual.cpp">
+    <ClCompile Include="omok_me.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
